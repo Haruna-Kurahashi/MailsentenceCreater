@@ -1,6 +1,7 @@
 package app.kurahasi.kuppie.mailsentencecreater
 
 
+import android.app.DatePickerDialog
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
@@ -15,13 +16,15 @@ import io.realm.RealmQuery
 import android.content.Intent
 import android.net.Uri
 import android.net.Uri.fromParts
-
-
+import java.util.*
 
 
 class MainActivity : AppCompatActivity() {
 
     private lateinit var mRealm: Realm
+    private var mYear: Int = 0
+    private var mMonth: Int = 0
+    private var mDay: Int = 0
 
     lateinit var adapter: CustomRealmRecyclerViewAdapter
 
@@ -29,6 +32,23 @@ class MainActivity : AppCompatActivity() {
     override fun onStart() {
         super.onStart()
 
+    }
+
+    private val mOnDateClickListener = View.OnClickListener {
+        val datePickerDialog = DatePickerDialog(
+            this,
+            DatePickerDialog.OnDateSetListener { _, year, monthOfYear, dayOfMonth ->
+                mYear = year
+                mMonth = monthOfYear
+                mDay = dayOfMonth
+                val dateString = mYear.toString() + "/" + String.format(
+                    "%02d",
+                    mMonth + 1
+                ) + "/" + String.format("%02d", mDay)
+                dateButton.setText(dateString)
+            }, mYear, mMonth, mDay
+        )
+        datePickerDialog.show()
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -43,36 +63,14 @@ class MainActivity : AppCompatActivity() {
         adapter = CustomRealmRecyclerViewAdapter(applicationContext)
         recyclerView.adapter = adapter
 
+        dateButton.setOnClickListener(mOnDateClickListener)
 
-        savebutton.setOnClickListener {
-                mRealm.executeTransaction {
-                    var plan = mRealm.createObject(PlanModel::class.java)
-                    plan.time =  timespinner.selectedItem as String
-                    plan.place = placespinner.selectedItem as String
-                    plan.content = contentspinner.selectedItem as String
-                    mRealm.copyToRealm(plan)
+        // 新規作成の場合 カレンダーから現在のを取得
+        val calendar = Calendar.getInstance()
+        mYear = calendar.get(Calendar.YEAR)
+        mMonth = calendar.get(Calendar.MONTH)
+        mDay = calendar.get(Calendar.DAY_OF_MONTH)
 
-                    roadalldata()
-                }
-        }
-
-        roadalldata()
-
-        sendbutton.setOnClickListener {
-            // Create the text message with a string
-            val sendIntent = Intent().apply {
-                action = Intent.ACTION_SEND
-                putExtra(Intent.EXTRA_SUBJECT, "練習計画")
-                putExtra(Intent.EXTRA_TEXT,  itemlist)
-                type = "text/plain"
-            }
-
-
-            if (sendIntent.resolveActivity(packageManager) != null) {
-                startActivity(sendIntent)
-            }
-
-        }
 
         val spinnerItems = arrayOf(
             "16:30~19:30",
@@ -121,7 +119,7 @@ class MainActivity : AppCompatActivity() {
                     val spinnerParent = parent as Spinner
                     val item = spinnerParent.selectedItem as String
                     //Kotlin Android Extensions
-                   //  timepreview.text = item
+                    //  timepreview.text = item
                 }
 
                 //　アイテムが選択されなかった
@@ -155,7 +153,7 @@ class MainActivity : AppCompatActivity() {
                     val spinnerParent = parent as Spinner
                     val item2 = spinnerParent.selectedItem as String
                     //Kotlin Android Extensions
-                 //   placepreview.text = item2
+                    //   placepreview.text = item2
                 }
 
                 //　アイテムが選択されなかった
@@ -188,7 +186,7 @@ class MainActivity : AppCompatActivity() {
                     val spinnerParent = parent as Spinner
                     val item3 = spinnerParent.selectedItem as String
                     //Kotlin Android Extensions
-                   // contentpreview.text = item3
+                    // contentpreview.text = item3
                 }
 
                 //　アイテムが選択されなかった
@@ -199,7 +197,41 @@ class MainActivity : AppCompatActivity() {
             }
 
 
+
+
+        savebutton.setOnClickListener {
+            mRealm.executeTransaction {
+                var plan = mRealm.createObject(PlanModel::class.java)
+                plan.time = timespinner.selectedItem as String
+                plan.place = placespinner.selectedItem as String
+                plan.content = contentspinner.selectedItem as String
+                mRealm.copyToRealm(plan)
+
+                roadalldata()
+            }
+        }
+
+        roadalldata()
+
+        sendbutton.setOnClickListener {
+            // Create the text message with a string
+            val sendIntent = Intent().apply {
+                action = Intent.ACTION_SEND
+                putExtra(Intent.EXTRA_SUBJECT, "練習計画")
+                putExtra(Intent.EXTRA_TEXT, "text")
+                type = "text/plain"
+            }
+
+
+            if (sendIntent.resolveActivity(packageManager) != null) {
+                startActivity(sendIntent)
+            }
+
+        }
+
+
     }
+
 
     fun roadalldata() {
         val query = mRealm.where(PlanModel::class.java)
