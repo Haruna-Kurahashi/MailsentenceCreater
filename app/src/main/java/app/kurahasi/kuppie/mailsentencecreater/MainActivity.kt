@@ -63,7 +63,7 @@ class MainActivity : AppCompatActivity() {
             val sendIntent = Intent().apply {
                 action = Intent.ACTION_SEND
                 putExtra(Intent.EXTRA_SUBJECT, "練習計画")
-                putExtra(Intent.EXTRA_TEXT,  )
+                putExtra(Intent.EXTRA_TEXT,  itemlist)
                 type = "text/plain"
             }
 
