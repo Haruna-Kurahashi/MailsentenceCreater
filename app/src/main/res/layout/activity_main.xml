@@ -27,7 +27,7 @@
             android:layout_height="wrap_content"
             android:text="----/--/--"
             android:textColor="#edffff"
-            android:textSize="24dp"/>
+            android:textSize="32dp"/>
 
         <Spinner
             android:id="@+id/timespinner"
@@ -76,11 +76,24 @@
 
     <Button
         android:id="@+id/sendbutton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="66dp"
+        android:layout_height="66dp"
         android:layout_marginEnd="24dp"
         android:layout_marginBottom="24dp"
-        android:text="Button"
+        android:background="@drawable/sendbutton_design"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/fab"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="16dp"
+        android:layout_marginBottom="16dp"
+        android:clickable="true"
+        android:src="@drawable/ic_add_white_24dp"
+        app:fabSize="normal"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent" />
 
@@ -95,8 +108,10 @@
         android:background="#19244a"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/savebutton">
+        app:layout_constraintTop_toBottomOf="@+id/savebutton"
+        app:layout_constraintVertical_bias="0.0">
 
 
         <LinearLayout
@@ -107,14 +122,13 @@
 
             <TextView
                 android:id="@+id/planTextView"
-                android:textColor="#edffff"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:textColor="#edffff"
                 android:textSize="12sp" />
         </LinearLayout>
 
     </ScrollView>
-
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
