@@ -20,45 +20,120 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
-        <Button
-            android:id="@+id/dateButton"
-            style="@style/Widget.AppCompat.Button.Borderless"
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="----/--/--"
-            android:textColor="#edffff"
-            android:textSize="32dp"/>
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:orientation="horizontal">
 
-        <Spinner
-            android:id="@+id/timespinner"
+            <ImageView
+                android:id="@+id/imageView"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginStart="16dp"
+                android:layout_weight="6"
+                app:srcCompat="@drawable/date_icon" />
+
+            <Button
+                android:id="@+id/dateButton"
+                style="@style/Widget.AppCompat.Button.Borderless"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginLeft="8dp"
+                android:layout_weight="1"
+                android:text="----/--/--"
+                android:textColor="#edffff"
+                android:textSize="14sp" />
+        </LinearLayout>
+
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
             android:layout_marginTop="16dp"
-            android:entries="@array/timeList"
-            android:textAlignment="center" />
+            android:orientation="horizontal">
 
+            <ImageView
+                android:id="@+id/imageView2"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginStart="16dp"
+                android:layout_weight="6"
+                app:srcCompat="@drawable/time_icon" />
 
-        <Spinner
-            android:id="@+id/placespinner"
+            <Spinner
+                android:id="@+id/timespinner"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginLeft="8dp"
+                android:layout_weight="1"
+                android:entries="@array/timeList"
+                android:paddingTop="8dp"
+                android:paddingBottom="8dp"
+                android:textAlignment="center" />
+
+        </LinearLayout>
+
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
             android:layout_marginTop="16dp"
-            android:entries="@array/contentList"
-            android:textAlignment="center"
-            app:layout_constraintTop_toBottomOf="@+id/timespinner" />
+            android:orientation="horizontal">
 
+            <ImageView
+                android:id="@+id/imageView4"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginStart="16dp"
+                android:layout_weight="6"
+                app:srcCompat="@drawable/place_icon" />
 
-        <Spinner
-            android:id="@+id/contentspinner"
+            <Spinner
+                android:id="@+id/placespinner"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginLeft="8dp"
+                android:layout_weight="1"
+                android:entries="@array/contentList"
+                android:paddingTop="8dp"
+                android:paddingBottom="8dp"
+                android:textAlignment="center"
+                app:layout_constraintTop_toBottomOf="@+id/timespinner" />
+
+        </LinearLayout>
+
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
             android:layout_marginTop="16dp"
-            android:background="@drawable/spinner_background"
-            android:entries="@array/contentList"
-            android:textAlignment="center"
-            app:layout_constraintTop_toBottomOf="@+id/placespinner" />
+            android:orientation="horizontal">
+
+            <ImageView
+                android:id="@+id/imageView3"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginStart="16dp"
+                android:layout_weight="6"
+                app:srcCompat="@drawable/content_icon" />
+
+            <Spinner
+                android:id="@+id/contentspinner"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginLeft="8dp"
+                android:layout_weight="1"
+                android:background="@drawable/spinner_background"
+                android:drawableLeft="@drawable/date_icon"
+                android:entries="@array/contentList"
+                android:paddingTop="8dp"
+                android:paddingBottom="8dp"
+
+                android:textAlignment="center"
+                app:layout_constraintTop_toBottomOf="@+id/placespinner" />
+
+        </LinearLayout>
 
     </LinearLayout>
+
 
     <Button
         android:id="@+id/savebutton"
@@ -66,13 +141,14 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="24dp"
         android:background="@drawable/button_design"
-        android:padding="16dp"
+        android:paddingLeft="16dp"
+        android:paddingRight="16dp"
         android:text="add to list"
         android:textColor="#edffff"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/linearLayout" />
-
 
     <Button
         android:id="@+id/sendbutton"
@@ -80,22 +156,10 @@
         android:layout_height="66dp"
         android:layout_marginEnd="24dp"
         android:layout_marginBottom="24dp"
-        android:background="@drawable/sendbutton_design"
+        android:background="@drawable/send_icon"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent" />
 
-
-    <com.google.android.material.floatingactionbutton.FloatingActionButton
-        android:id="@+id/fab"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginEnd="16dp"
-        android:layout_marginBottom="16dp"
-        android:clickable="true"
-        android:src="@drawable/ic_add_white_24dp"
-        app:fabSize="normal"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent" />
 
     <ScrollView
         android:id="@+id/scrollView"
@@ -124,8 +188,11 @@
                 android:id="@+id/planTextView"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+
+                android:layout_marginLeft="24dp"
+                android:layout_marginRight="24dp"
                 android:textColor="#edffff"
-                android:textSize="12sp" />
+                android:textSize="14sp" />
         </LinearLayout>
 
     </ScrollView>

@@ -2,7 +2,8 @@
     android:width="22.34dp"
     android:height="17.33dp"
     android:viewportWidth="22.34"
-    android:viewportHeight="17.33">
+    android:viewportHeight="17.33"
+    android:textColor="#edffff">
   <path
       android:pathData="M1.46,2.02L20.87,2.02A1.09,1.09 0,0 1,21.96 3.11L21.96,15.87A1.09,1.09 0,0 1,20.87 16.96L1.46,16.96A1.09,1.09 0,0 1,0.37 15.87L0.37,3.11A1.09,1.09 0,0 1,1.46 2.02z"
       android:strokeLineJoin="round"
