@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#E8FBFD"
+    android:background="#19244a"
     tools:context=".MainActivity">
 
 
@@ -13,7 +13,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="24dp"
-        android:layout_marginTop="24dp"
+        android:layout_marginTop="16dp"
         android:layout_marginEnd="24dp"
         android:orientation="vertical"
         app:layout_constraintEnd_toEndOf="parent"
@@ -25,13 +25,15 @@
             style="@style/Widget.AppCompat.Button.Borderless"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="----/--/--" />
+            android:text="----/--/--"
+            android:textColor="#edffff"
+            android:textSize="24dp"/>
 
         <Spinner
             android:id="@+id/timespinner"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="24dp"
+            android:layout_marginTop="16dp"
             android:entries="@array/timeList"
             android:textAlignment="center" />
 
@@ -40,7 +42,7 @@
             android:id="@+id/placespinner"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="24dp"
+            android:layout_marginTop="16dp"
             android:entries="@array/contentList"
             android:textAlignment="center"
             app:layout_constraintTop_toBottomOf="@+id/timespinner" />
@@ -50,7 +52,7 @@
             android:id="@+id/contentspinner"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="24dp"
+            android:layout_marginTop="16dp"
             android:background="@drawable/spinner_background"
             android:entries="@array/contentList"
             android:textAlignment="center"
@@ -63,10 +65,14 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="24dp"
-        android:text="Add"
+        android:background="@drawable/button_design"
+        android:padding="16dp"
+        android:text="add to list"
+        android:textColor="#edffff"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/linearLayout"/>
+        app:layout_constraintTop_toBottomOf="@+id/linearLayout" />
+
 
     <Button
         android:id="@+id/sendbutton"
@@ -86,7 +92,7 @@
         android:layout_marginTop="16dp"
         android:layout_marginEnd="16dp"
         android:layout_marginBottom="16dp"
-        android:background="#FFF5E3"
+        android:background="#19244a"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -101,9 +107,9 @@
 
             <TextView
                 android:id="@+id/planTextView"
+                android:textColor="#edffff"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="※ここにテキストが入ります"
                 android:textSize="12sp" />
         </LinearLayout>
 

@@ -257,13 +257,15 @@ class MainActivity : AppCompatActivity() {
                 // roadalldata()
             }
 
+            stringBuilder.append("${mYear}/${mMonth + 1}/${mDay}\n")
 
-            for ((index, value) in selectedItems.withIndex()) {
+            for ((index : Int, value : String) in selectedItems.withIndex()) {
                 stringBuilder.append("${titleItems[index]} : ${value}\n")
             }
             Log.d("stringBuilder", stringBuilder.toString())
             stringBuilder.append("          \n")
             planTextView.text = stringBuilder.toString()
+
         }
 
 //        roadalldata()
