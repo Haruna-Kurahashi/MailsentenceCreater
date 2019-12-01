@@ -8,89 +8,107 @@
     tools:context=".MainActivity">
 
 
-    <Button
-        android:id="@+id/dateButton"
-        style="@style/Widget.AppCompat.Button.Borderless"
-        android:layout_width="wrap_content"
+    <LinearLayout
+        android:id="@+id/linearLayout"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="32dp"
-        android:layout_weight="1.8"
-        android:text="----/--/--"
-        app:layout_constraintBottom_toTopOf="@+id/placespinner"
+        android:layout_marginStart="24dp"
+        android:layout_marginTop="24dp"
+        android:layout_marginEnd="24dp"
+        android:orientation="vertical"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
-
-    <Spinner
-        android:id="@+id/timespinner"
-        android:layout_width="200dp"
-        android:layout_height="wrap_content"
-        android:layout_margin="20dp"
-        android:background="#fff"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.497"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.142" />
+        app:layout_constraintTop_toTopOf="parent">
+
+        <Button
+            android:id="@+id/dateButton"
+            style="@style/Widget.AppCompat.Button.Borderless"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="----/--/--" />
+
+        <Spinner
+            android:id="@+id/timespinner"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="24dp"
+            android:entries="@array/timeList"
+            android:textAlignment="center" />
 
 
-    <Spinner
-        android:id="@+id/placespinner"
-        android:layout_width="200dp"
-        android:layout_height="wrap_content"
-        android:layout_margin="20dp"
-        android:layout_marginTop="100dp"
-        android:background="#fff"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.497"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/timespinner" />
+        <Spinner
+            android:id="@+id/placespinner"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="24dp"
+            android:entries="@array/contentList"
+            android:textAlignment="center"
+            app:layout_constraintTop_toBottomOf="@+id/timespinner" />
 
-    <Spinner
-        android:id="@+id/contentspinner"
-        android:layout_width="200dp"
-        android:layout_height="wrap_content"
-        android:layout_margin="20dp"
-        android:layout_marginTop="100dp"
-        android:background="@drawable/spinner_background"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.497"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/placespinner"/>
 
+        <Spinner
+            android:id="@+id/contentspinner"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="24dp"
+            android:background="@drawable/spinner_background"
+            android:entries="@array/contentList"
+            android:textAlignment="center"
+            app:layout_constraintTop_toBottomOf="@+id/placespinner" />
+
+    </LinearLayout>
 
     <Button
         android:id="@+id/savebutton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="72dp"
-        android:text="Button"
+        android:layout_marginTop="24dp"
+        android:text="Add"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/contentspinner" />
-
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/recyclerview"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_marginTop="356dp"
-        android:layout_marginBottom="80dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        tools:layout_editor_absoluteX="0dp" >
-
-    </androidx.recyclerview.widget.RecyclerView>
+        app:layout_constraintTop_toBottomOf="@+id/linearLayout"/>
 
     <Button
         android:id="@+id/sendbutton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginEnd="24dp"
+        android:layout_marginBottom="24dp"
         android:text="Button"
         app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+    <ScrollView
+        android:id="@+id/scrollView"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginBottom="16dp"
+        android:background="#FFF5E3"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.916"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/recyclerview" />
+        app:layout_constraintTop_toBottomOf="@+id/savebutton">
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="8dp">
+
+            <TextView
+                android:id="@+id/planTextView"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="※ここにテキストが入ります"
+                android:textSize="12sp" />
+        </LinearLayout>
+
+    </ScrollView>
+
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

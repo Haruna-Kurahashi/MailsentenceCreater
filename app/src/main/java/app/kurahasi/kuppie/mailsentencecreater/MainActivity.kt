@@ -14,8 +14,10 @@ import kotlinx.android.synthetic.main.activity_main.*
 import io.realm.RealmResults
 import io.realm.RealmQuery
 import android.content.Intent
+import android.graphics.Color
 import android.net.Uri
 import android.net.Uri.fromParts
+import android.util.Log
 import java.util.*
 
 
@@ -26,7 +28,7 @@ class MainActivity : AppCompatActivity() {
     private var mMonth: Int = 0
     private var mDay: Int = 0
 
-    lateinit var adapter: CustomRealmRecyclerViewAdapter
+    //lateinit var adapter: CustomRealmRecyclerViewAdapter
 
 
     override fun onStart() {
@@ -51,17 +53,61 @@ class MainActivity : AppCompatActivity() {
         datePickerDialog.show()
     }
 
+
+    var selectedItems: Array<String> = arrayOf("", "", "")
+    var titleItems: Array<String> = arrayOf("時間", "場所", "内容")
+
+
+    private val mOnItemSelectedListener = object : AdapterView.OnItemSelectedListener {
+
+        // アイテムが選択されなかったとき
+        override fun onNothingSelected(parent: AdapterView<*>?) {
+        }
+
+        // アイテムが選択されたとき
+        override fun onItemSelected(parent: AdapterView<*>, view: View, postion: Int, id: Long) {
+            val item = parent.getItemAtPosition(postion)
+
+            // 初回起動時の動作
+            if (!parent.isFocusable) {
+                parent.isFocusable = true
+                return
+            }
+
+            // 初回以降の動作
+            parent.findViewById<TextView>(android.R.id.text1)
+                .setTextColor(Color.parseColor("#000000"))
+
+            when (parent.id) {
+                R.id.timespinner -> {
+                    selectedItems[0] = item as String
+                    Log.d("item[0]", item)
+                }
+                R.id.placespinner -> {
+                    selectedItems[1] = item as String
+                    Log.d("item[1]", item)
+                }
+                R.id.contentspinner -> {
+                    selectedItems[2] = item as String
+                    Log.d("item[2]", item)
+                }
+            }
+        }
+    }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
+        setSpinnerAdapter()
+
         mRealm = Realm.getDefaultInstance()
 
         val realmResults = mRealm.where(PlanModel::class.java).findAll()
-        val recyclerView = findViewById<RecyclerView>(R.id.recyclerview)
-        recyclerView.layoutManager = LinearLayoutManager(this)
-        adapter = CustomRealmRecyclerViewAdapter(applicationContext)
-        recyclerView.adapter = adapter
+        /* val recyclerView = findViewById<RecyclerView>(R.id.recyclerview)
+         recyclerView.layoutManager = LinearLayoutManager(this)
+         adapter = CustomRealmRecyclerViewAdapter(applicationContext)
+         recyclerView.adapter = adapter*/
 
         dateButton.setOnClickListener(mOnDateClickListener)
 
@@ -72,7 +118,7 @@ class MainActivity : AppCompatActivity() {
         mDay = calendar.get(Calendar.DAY_OF_MONTH)
 
 
-        val spinnerItems = arrayOf(
+      /*val spinnerItems = arrayOf(
             "16:30~19:30",
             "18:00~21:00",
             "18:30~21:30"
@@ -194,9 +240,10 @@ class MainActivity : AppCompatActivity() {
 
                 }
 
-            }
+            }*/
 
 
+        val stringBuilder = StringBuilder()
 
 
         savebutton.setOnClickListener {
@@ -207,22 +254,29 @@ class MainActivity : AppCompatActivity() {
                 plan.content = contentspinner.selectedItem as String
                 mRealm.copyToRealm(plan)
 
-                roadalldata()
+                // roadalldata()
             }
+
+
+            for ((index, value) in selectedItems.withIndex()) {
+                stringBuilder.append("${titleItems[index]} : ${value}\n")
+            }
+            Log.d("stringBuilder", stringBuilder.toString())
+            stringBuilder.append("          \n")
+            planTextView.text = stringBuilder.toString()
         }
 
-        roadalldata()
+//        roadalldata()
+
+        scrollView.isScrollbarFadingEnabled = false
 
         sendbutton.setOnClickListener {
-            // Create the text message with a string
             val sendIntent = Intent().apply {
                 action = Intent.ACTION_SEND
                 putExtra(Intent.EXTRA_SUBJECT, "練習計画")
-                putExtra(Intent.EXTRA_TEXT, "text")
+                putExtra(Intent.EXTRA_TEXT, stringBuilder.toString())
                 type = "text/plain"
             }
-
-
             if (sendIntent.resolveActivity(packageManager) != null) {
                 startActivity(sendIntent)
             }
@@ -233,17 +287,51 @@ class MainActivity : AppCompatActivity() {
     }
 
 
-    fun roadalldata() {
-        val query = mRealm.where(PlanModel::class.java)
-        val result = query.findAll()
-        adapter.clear()
+    private fun setSpinnerAdapter() {
+        val timeAdapter = ArrayAdapter<String>(
+            this,
+            R.layout.custom_spinner,
+            resources.getStringArray(R.array.timeList)
+        )
+        val placeAdapter = ArrayAdapter<String>(
+            this,
+            R.layout.custom_spinner,
+            resources.getStringArray(R.array.placeList)
+        )
+        val contentsAdapter = ArrayAdapter<String>(
+            this,
+            R.layout.custom_spinner,
+            resources.getStringArray(R.array.contentList)
+        )
+        timeAdapter.setDropDownViewResource(R.layout.custom_spinner_dropdown)
+        timespinner.adapter = timeAdapter
+        placeAdapter.setDropDownViewResource(R.layout.custom_spinner_dropdown)
+        placespinner.adapter = placeAdapter
+        contentsAdapter.setDropDownViewResource(R.layout.custom_spinner_dropdown)
+        contentspinner.adapter = contentsAdapter
 
-        for (item in result) {
-            adapter.additem(item)
-        }
+        timespinner.isFocusable = false
+        placespinner.isFocusable = false
+        contentspinner.isFocusable = false
 
-        adapter.notifyDataSetChanged()
+        timespinner.onItemSelectedListener = mOnItemSelectedListener
+        placespinner.onItemSelectedListener = mOnItemSelectedListener
+        contentspinner.onItemSelectedListener = mOnItemSelectedListener
+
     }
+
+
+    /* fun roadalldata() {
+         val query = mRealm.where(PlanModel::class.java)
+         val result = query.findAll()
+         adapter.clear()
+
+         for (item in result) {
+             adapter.additem(item)
+         }
+
+         adapter.notifyDataSetChanged()
+     }*/
 
 
 }
