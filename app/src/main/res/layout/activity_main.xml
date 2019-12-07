@@ -30,7 +30,7 @@
                 android:id="@+id/imageView"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:layout_marginStart="16dp"
+                android:layout_marginStart="8dp"
                 android:layout_weight="6"
                 app:srcCompat="@drawable/date_icon" />
 
@@ -39,11 +39,13 @@
                 style="@style/Widget.AppCompat.Button.Borderless"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:layout_marginLeft="8dp"
+                android:layout_marginLeft="16dp"
                 android:layout_weight="1"
+                android:background="@drawable/spinner_background4"
                 android:text="----/--/--"
                 android:textColor="#edffff"
                 android:textSize="14sp" />
+
         </LinearLayout>
 
         <LinearLayout
@@ -56,7 +58,7 @@
                 android:id="@+id/imageView2"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:layout_marginStart="16dp"
+                android:layout_marginStart="8dp"
                 android:layout_weight="6"
                 app:srcCompat="@drawable/time_icon" />
 
@@ -64,10 +66,12 @@
                 android:id="@+id/timespinner"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:layout_marginLeft="8dp"
+                android:layout_marginLeft="16dp"
                 android:layout_weight="1"
+                android:background="@drawable/spinner_background3"
                 android:entries="@array/timeList"
                 android:paddingTop="8dp"
+                android:paddingEnd="16dp"
                 android:paddingBottom="8dp"
                 android:textAlignment="center" />
 
@@ -83,7 +87,7 @@
                 android:id="@+id/imageView4"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:layout_marginStart="16dp"
+                android:layout_marginStart="8dp"
                 android:layout_weight="6"
                 app:srcCompat="@drawable/place_icon" />
 
@@ -91,10 +95,12 @@
                 android:id="@+id/placespinner"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:layout_marginLeft="8dp"
+                android:layout_marginLeft="16dp"
                 android:layout_weight="1"
+                android:background="@drawable/spinner_background2"
                 android:entries="@array/contentList"
                 android:paddingTop="8dp"
+                android:paddingEnd="16dp"
                 android:paddingBottom="8dp"
                 android:textAlignment="center"
                 app:layout_constraintTop_toBottomOf="@+id/timespinner" />
@@ -111,7 +117,7 @@
                 android:id="@+id/imageView3"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:layout_marginStart="16dp"
+                android:layout_marginStart="8dp"
                 android:layout_weight="6"
                 app:srcCompat="@drawable/content_icon" />
 
@@ -119,14 +125,14 @@
                 android:id="@+id/contentspinner"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:layout_marginLeft="8dp"
+                android:layout_marginLeft="16dp"
                 android:layout_weight="1"
                 android:background="@drawable/spinner_background"
                 android:drawableLeft="@drawable/date_icon"
                 android:entries="@array/contentList"
                 android:paddingTop="8dp"
+                android:paddingEnd="16dp"
                 android:paddingBottom="8dp"
-
                 android:textAlignment="center"
                 app:layout_constraintTop_toBottomOf="@+id/placespinner" />
 
@@ -165,11 +171,10 @@
         android:id="@+id/scrollView"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_marginStart="16dp"
+        android:layout_marginStart="24dp"
         android:layout_marginTop="16dp"
-        android:layout_marginEnd="16dp"
+        android:layout_marginEnd="24dp"
         android:layout_marginBottom="16dp"
-        android:background="#19244a"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"

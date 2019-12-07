@@ -51,6 +51,7 @@ class MainActivity : AppCompatActivity() {
             }, mYear, mMonth, mDay
         )
         datePickerDialog.show()
+
     }
 
 
@@ -76,7 +77,7 @@ class MainActivity : AppCompatActivity() {
 
             // 初回以降の動作
             parent.findViewById<TextView>(android.R.id.text1)
-                .setTextColor(Color.parseColor("#000000"))
+                .setTextColor(Color.parseColor("#edffff"))
 
             when (parent.id) {
                 R.id.timespinner -> {
